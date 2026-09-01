@@ -62,6 +62,7 @@
   /* City picker sheet */
   .sheet-backdrop{position:fixed; inset:0; background:rgba(0,0,0,0.5); display:none; align-items:flex-end; z-index:50;}
   .sheet-backdrop.active{display:flex;}
+  #alarm-sheet-backdrop{z-index:300;}
   .sheet{background:var(--surface); width:100%; max-height:75vh; border-radius:20px 20px 0 0; padding:16px 16px 24px; overflow-y:auto;}
   .sheet-handle{width:36px; height:4px; background:var(--surface-3); border-radius:2px; margin:0 auto 14px;}
   .sheet-title{font-size:16px; font-weight:600; margin:0 0 12px; padding:0 4px;}
@@ -124,9 +125,9 @@
 
   .wheel-wrap{display:flex; justify-content:center; align-items:center; gap:2px; padding:14px 0 26px; position:relative;}
   .wheel-wrap::before, .wheel-wrap::after{content:''; position:absolute; left:14px; right:14px; height:56px; pointer-events:none;}
-  .wheel-col{height:280px; width:92px; overflow-y:scroll; scroll-snap-type:y mandatory; -ms-overflow-style:none; scrollbar-width:none;}
+  .wheel-col{height:280px; width:92px; overflow-y:scroll; scroll-snap-type:y mandatory; -ms-overflow-style:none; scrollbar-width:none; touch-action:pan-y; -webkit-overflow-scrolling:touch;}
   .wheel-col::-webkit-scrollbar{display:none;}
-  .wheel-item{height:56px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:24px; color:var(--text-faint); scroll-snap-align:center;}
+  .wheel-item{height:56px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:24px; color:var(--text-faint); scroll-snap-align:center; user-select:none; -webkit-user-select:none;}
   .wheel-item.center{font-size:38px; color:var(--text); font-weight:600;}
   .wheel-pad{height:112px;}
   .wheel-sep{font-family:var(--font-display); font-size:38px; font-weight:600; padding:0 2px; color:var(--text);}
@@ -622,11 +623,15 @@ function checkAlarms(){
 /* ============ Full-screen Alarm Editor ============ */
 function buildWheel(el, values, initialIndex, onSettle){
   el.innerHTML = '';
+  var itemH = 56;
   var pad1 = document.createElement('div'); pad1.className = 'wheel-pad'; el.appendChild(pad1);
-  values.forEach(function(v){
+  values.forEach(function(v, i){
     var it = document.createElement('div');
     it.className = 'wheel-item';
     it.textContent = v;
+    it.addEventListener('click', function(){
+      el.scrollTo({top: i * itemH, behavior:'smooth'});
+    });
     el.appendChild(it);
   });
   var pad2 = document.createElement('div'); pad2.className = 'wheel-pad'; el.appendChild(pad2);
