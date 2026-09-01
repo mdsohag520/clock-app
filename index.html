@@ -282,6 +282,7 @@
   <div class="sheet">
     <div class="sheet-handle"></div>
     <p class="sheet-title">Add a city</p>
+    <input type="text" class="sheet-input" id="city-search" placeholder="Search city...">
     <div id="sheet-list"></div>
   </div>
 </div>
@@ -345,22 +346,110 @@
 var CITY_CATALOG = [
   {name:'New York', tz:'America/New_York'},
   {name:'Los Angeles', tz:'America/Los_Angeles'},
+  {name:'Chicago', tz:'America/Chicago'},
+  {name:'Denver', tz:'America/Denver'},
+  {name:'Toronto', tz:'America/Toronto'},
+  {name:'Vancouver', tz:'America/Vancouver'},
+  {name:'Mexico City', tz:'America/Mexico_City'},
+  {name:'Bogota', tz:'America/Bogota'},
+  {name:'Lima', tz:'America/Lima'},
+  {name:'Santiago', tz:'America/Santiago'},
   {name:'Sao Paulo', tz:'America/Sao_Paulo'},
+  {name:'Buenos Aires', tz:'America/Argentina/Buenos_Aires'},
+  {name:'Caracas', tz:'America/Caracas'},
+  {name:'Havana', tz:'America/Havana'},
+  {name:'Honolulu', tz:'Pacific/Honolulu'},
+  {name:'Anchorage', tz:'America/Anchorage'},
   {name:'London', tz:'Europe/London'},
+  {name:'Dublin', tz:'Europe/Dublin'},
+  {name:'Lisbon', tz:'Europe/Lisbon'},
+  {name:'Madrid', tz:'Europe/Madrid'},
   {name:'Paris', tz:'Europe/Paris'},
-  {name:'Cairo', tz:'Africa/Cairo'},
-  {name:'Dubai', tz:'Asia/Dubai'},
-  {name:'Dhaka', tz:'Asia/Dhaka'},
-  {name:'Kolkata', tz:'Asia/Kolkata'},
-  {name:'Bangkok', tz:'Asia/Bangkok'},
-  {name:'Singapore', tz:'Asia/Singapore'},
-  {name:'Hong Kong', tz:'Asia/Hong_Kong'},
-  {name:'Tokyo', tz:'Asia/Tokyo'},
-  {name:'Seoul', tz:'Asia/Seoul'},
-  {name:'Sydney', tz:'Australia/Sydney'},
-  {name:'Auckland', tz:'Pacific/Auckland'},
+  {name:'Brussels', tz:'Europe/Brussels'},
+  {name:'Amsterdam', tz:'Europe/Amsterdam'},
+  {name:'Berlin', tz:'Europe/Berlin'},
+  {name:'Zurich', tz:'Europe/Zurich'},
+  {name:'Rome', tz:'Europe/Rome'},
+  {name:'Vienna', tz:'Europe/Vienna'},
+  {name:'Prague', tz:'Europe/Prague'},
+  {name:'Warsaw', tz:'Europe/Warsaw'},
+  {name:'Budapest', tz:'Europe/Budapest'},
+  {name:'Stockholm', tz:'Europe/Stockholm'},
+  {name:'Oslo', tz:'Europe/Oslo'},
+  {name:'Copenhagen', tz:'Europe/Copenhagen'},
+  {name:'Helsinki', tz:'Europe/Helsinki'},
+  {name:'Athens', tz:'Europe/Athens'},
+  {name:'Bucharest', tz:'Europe/Bucharest'},
+  {name:'Sofia', tz:'Europe/Sofia'},
+  {name:'Kyiv', tz:'Europe/Kyiv'},
   {name:'Moscow', tz:'Europe/Moscow'},
-  {name:'Toronto', tz:'America/Toronto'}
+  {name:'Istanbul', tz:'Europe/Istanbul'},
+  {name:'Cairo', tz:'Africa/Cairo'},
+  {name:'Lagos', tz:'Africa/Lagos'},
+  {name:'Nairobi', tz:'Africa/Nairobi'},
+  {name:'Johannesburg', tz:'Africa/Johannesburg'},
+  {name:'Casablanca', tz:'Africa/Casablanca'},
+  {name:'Algiers', tz:'Africa/Algiers'},
+  {name:'Addis Ababa', tz:'Africa/Addis_Ababa'},
+  {name:'Accra', tz:'Africa/Accra'},
+  {name:'Tunis', tz:'Africa/Tunis'},
+  {name:'Dubai', tz:'Asia/Dubai'},
+  {name:'Abu Dhabi', tz:'Asia/Dubai'},
+  {name:'Doha', tz:'Asia/Qatar'},
+  {name:'Riyadh', tz:'Asia/Riyadh'},
+  {name:'Kuwait City', tz:'Asia/Kuwait'},
+  {name:'Muscat', tz:'Asia/Muscat'},
+  {name:'Baghdad', tz:'Asia/Baghdad'},
+  {name:'Tehran', tz:'Asia/Tehran'},
+  {name:'Jerusalem', tz:'Asia/Jerusalem'},
+  {name:'Amman', tz:'Asia/Amman'},
+  {name:'Beirut', tz:'Asia/Beirut'},
+  {name:'Karachi', tz:'Asia/Karachi'},
+  {name:'Lahore', tz:'Asia/Karachi'},
+  {name:'Islamabad', tz:'Asia/Karachi'},
+  {name:'Dhaka', tz:'Asia/Dhaka'},
+  {name:'Chittagong', tz:'Asia/Dhaka'},
+  {name:'Kolkata', tz:'Asia/Kolkata'},
+  {name:'Mumbai', tz:'Asia/Kolkata'},
+  {name:'New Delhi', tz:'Asia/Kolkata'},
+  {name:'Bangalore', tz:'Asia/Kolkata'},
+  {name:'Chennai', tz:'Asia/Kolkata'},
+  {name:'Kathmandu', tz:'Asia/Kathmandu'},
+  {name:'Colombo', tz:'Asia/Colombo'},
+  {name:'Yangon', tz:'Asia/Yangon'},
+  {name:'Bangkok', tz:'Asia/Bangkok'},
+  {name:'Phnom Penh', tz:'Asia/Phnom_Penh'},
+  {name:'Hanoi', tz:'Asia/Ho_Chi_Minh'},
+  {name:'Ho Chi Minh City', tz:'Asia/Ho_Chi_Minh'},
+  {name:'Vientiane', tz:'Asia/Vientiane'},
+  {name:'Kuala Lumpur', tz:'Asia/Kuala_Lumpur'},
+  {name:'Singapore', tz:'Asia/Singapore'},
+  {name:'Jakarta', tz:'Asia/Jakarta'},
+  {name:'Manila', tz:'Asia/Manila'},
+  {name:'Hong Kong', tz:'Asia/Hong_Kong'},
+  {name:'Taipei', tz:'Asia/Taipei'},
+  {name:'Shanghai', tz:'Asia/Shanghai'},
+  {name:'Beijing', tz:'Asia/Shanghai'},
+  {name:'Seoul', tz:'Asia/Seoul'},
+  {name:'Pyongyang', tz:'Asia/Pyongyang'},
+  {name:'Tokyo', tz:'Asia/Tokyo'},
+  {name:'Osaka', tz:'Asia/Tokyo'},
+  {name:'Ulaanbaatar', tz:'Asia/Ulaanbaatar'},
+  {name:'Tashkent', tz:'Asia/Tashkent'},
+  {name:'Almaty', tz:'Asia/Almaty'},
+  {name:'Baku', tz:'Asia/Baku'},
+  {name:'Yerevan', tz:'Asia/Yerevan'},
+  {name:'Tbilisi', tz:'Asia/Tbilisi'},
+  {name:'Sydney', tz:'Australia/Sydney'},
+  {name:'Melbourne', tz:'Australia/Melbourne'},
+  {name:'Brisbane', tz:'Australia/Brisbane'},
+  {name:'Perth', tz:'Australia/Perth'},
+  {name:'Adelaide', tz:'Australia/Adelaide'},
+  {name:'Auckland', tz:'Pacific/Auckland'},
+  {name:'Wellington', tz:'Pacific/Auckland'},
+  {name:'Fiji', tz:'Pacific/Fiji'},
+  {name:'Port Moresby', tz:'Pacific/Port_Moresby'},
+  {name:'Guam', tz:'Pacific/Guam'}
 ];
 
 var DAY_LABELS = ['S','M','T','W','T','F','S'];
@@ -448,11 +537,21 @@ function renderCities(){
     list.appendChild(card);
   });
 }
-function openCitySheet(){
+function renderCitySheetList(filterText){
   var sheetList = document.getElementById('sheet-list');
   sheetList.innerHTML = '';
   var added = state.cities.map(function(c){return c.tz;});
-  CITY_CATALOG.filter(function(c){return added.indexOf(c.tz) === -1;}).forEach(function(c){
+  var q = (filterText || '').trim().toLowerCase();
+  var results = CITY_CATALOG.filter(function(c){
+    if(added.indexOf(c.tz) !== -1) return false;
+    if(q && c.name.toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+  if(results.length === 0){
+    sheetList.innerHTML = '<div class="empty-state"><p>No matching city.</p></div>';
+    return;
+  }
+  results.forEach(function(c){
     var item = document.createElement('div');
     item.className = 'sheet-item';
     item.innerHTML = '<div>'+c.name+'</div><span>'+offsetLabel(c.tz)+'</span>';
@@ -463,8 +562,16 @@ function openCitySheet(){
     });
     sheetList.appendChild(item);
   });
-  document.getElementById('sheet-backdrop').classList.add('active');
 }
+function openCitySheet(){
+  document.getElementById('city-search').value = '';
+  renderCitySheetList('');
+  document.getElementById('sheet-backdrop').classList.add('active');
+  setTimeout(function(){ document.getElementById('city-search').focus(); }, 200);
+}
+document.getElementById('city-search').addEventListener('input', function(){
+  renderCitySheetList(this.value);
+});
 document.getElementById('btn-add-city').addEventListener('click', openCitySheet);
 document.getElementById('sheet-backdrop').addEventListener('click', function(e){
   if(e.target === this) this.classList.remove('active');
