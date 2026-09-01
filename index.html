@@ -62,18 +62,40 @@
   /* City picker sheet */
   .sheet-backdrop{position:fixed; inset:0; background:rgba(0,0,0,0.5); display:none; align-items:flex-end; z-index:50;}
   .sheet-backdrop.active{display:flex;}
-  .sheet{background:var(--surface); width:100%; max-height:70vh; border-radius:20px 20px 0 0; padding:16px 16px 24px; overflow-y:auto;}
+  .sheet{background:var(--surface); width:100%; max-height:75vh; border-radius:20px 20px 0 0; padding:16px 16px 24px; overflow-y:auto;}
   .sheet-handle{width:36px; height:4px; background:var(--surface-3); border-radius:2px; margin:0 auto 14px;}
   .sheet-title{font-size:16px; font-weight:600; margin:0 0 12px; padding:0 4px;}
-  .sheet-item{padding:14px 8px; font-size:15px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; color:var(--text);}
+  .sheet-item{padding:14px 8px; font-size:15px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; color:var(--text);}
   .sheet-item:active{background:var(--surface-2);}
   .sheet-item span{color:var(--text-dim); font-size:13px;}
+  .sheet-item .check{color:var(--accent); font-size:16px; visibility:hidden;}
+  .sheet-item.selected .check{visibility:visible;}
+  .sheet-done{width:100%; padding:14px; border-radius:12px; background:var(--accent); color:#20180C; font-weight:600; font-size:15px; margin-top:14px;}
+  .sheet-done:active{opacity:0.85;}
+  .sheet-input{width:100%; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:13px 14px; color:var(--text); font-size:15px; margin-bottom:6px;}
+  .sheet-presets{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 4px;}
 
-  /* ---------- Alarm ---------- */
+  .day-grid{display:flex; justify-content:space-between; padding:6px 4px 4px;}
+  .day-btn{width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--text-dim); background:var(--surface-2); font-weight:500;}
+  .day-btn.on{background:var(--accent); color:#20180C; font-weight:700;}
+  .quick-presets{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0 4px;}
+  .quick-chip{padding:8px 14px; border-radius:20px; background:var(--surface-2); border:1px solid var(--border); font-size:13px; color:var(--text-dim);}
+  .quick-chip.active{background:var(--accent-dim); border-color:var(--accent); color:var(--accent);}
+
+  .num-field{display:flex; align-items:center; justify-content:space-between; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:8px 8px 8px 16px; margin-bottom:12px;}
+  .num-field label{font-size:14px; color:var(--text-dim);}
+  .num-stepper{display:flex; align-items:center; gap:2px;}
+  .num-stepper button{width:34px; height:34px; border-radius:8px; background:var(--surface-3); font-size:18px; display:flex; align-items:center; justify-content:center; color:var(--text);}
+  .num-stepper button:active{background:var(--surface-2);}
+  .num-stepper .num-val{width:44px; text-align:center; font-family:var(--font-display); font-size:16px;}
+
+  /* ---------- Alarm list ---------- */
   .alarm-card{background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:16px 18px; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;}
-  .alarm-card.disabled .alarm-time, .alarm-card.disabled .alarm-label{opacity:0.4;}
+  .alarm-card.disabled .alarm-time, .alarm-card.disabled .alarm-label, .alarm-card.disabled .alarm-repeat{opacity:0.4;}
+  .alarm-main{flex:1;}
   .alarm-time{font-family:var(--font-display); font-size:30px; font-weight:500;}
   .alarm-label{font-size:12px; color:var(--text-dim); margin-top:4px;}
+  .alarm-repeat{font-size:11px; color:var(--accent); margin-top:2px;}
   .switch{width:46px; height:28px; border-radius:14px; background:var(--surface-3); position:relative; flex-shrink:0;}
   .switch.on{background:var(--accent);}
   .switch::after{content:''; position:absolute; width:22px; height:22px; border-radius:50%; background:var(--text); top:3px; left:3px; transition:transform 0.15s;}
@@ -82,19 +104,45 @@
   .add-alarm-btn{width:100%; padding:14px; border-radius:16px; border:1px dashed var(--border); color:var(--accent); font-size:14px; font-weight:500; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:8px;}
   .add-alarm-btn:active{background:var(--surface);}
 
-  .alarm-editor{background:var(--surface); border-radius:20px; padding:20px; margin-bottom:14px;}
-  .alarm-editor input[type="time"]{width:100%; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:14px; color:var(--text); font-family:var(--font-display); font-size:28px; text-align:center; margin-bottom:14px;}
-  .alarm-editor input[type="text"]{width:100%; background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:12px 14px; color:var(--text); font-size:14px; margin-bottom:14px;}
-  .editor-actions{display:flex; gap:10px;}
+  .ringing-banner{background:var(--danger-dim); border:1px solid var(--danger); border-radius:16px; padding:18px; margin-bottom:14px; text-align:center;}
+  .ringing-banner .rt{font-family:var(--font-display); font-size:15px; color:var(--danger); font-weight:500; margin-bottom:2px;}
+  .ringing-banner .rl{font-size:13px; color:var(--text-dim); margin-bottom:14px;}
+  .ringing-actions{display:flex; gap:10px;}
   .btn{flex:1; padding:13px; border-radius:12px; font-size:14px; font-weight:500; text-align:center;}
   .btn-primary{background:var(--accent); color:#20180C;}
   .btn-secondary{background:var(--surface-2); color:var(--text-dim); border:1px solid var(--border);}
   .btn:active{opacity:0.85;}
 
-  .ringing-banner{background:var(--danger-dim); border:1px solid var(--danger); border-radius:16px; padding:18px; margin-bottom:14px; text-align:center;}
-  .ringing-banner .rt{font-family:var(--font-display); font-size:15px; color:var(--danger); font-weight:500; margin-bottom:2px;}
-  .ringing-banner .rl{font-size:13px; color:var(--text-dim); margin-bottom:14px;}
-  .ringing-actions{display:flex; gap:10px;}
+  /* ---------- Full-screen Alarm Editor ---------- */
+  .alarm-overlay{position:fixed; inset:0; background:var(--bg); z-index:200; display:none; flex-direction:column;}
+  .alarm-overlay.active{display:flex;}
+  .ao-header{display:flex; align-items:center; justify-content:space-between; padding:18px 18px 8px; flex-shrink:0;}
+  .ao-header button{width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--text);}
+  .ao-header .ao-save{color:var(--accent); font-weight:700; font-size:20px;}
+  .ao-header h2{font-family:var(--font-display); font-size:18px; font-weight:600; margin:0;}
+  .ao-body{flex:1; overflow-y:auto; padding:6px 16px 40px;}
+
+  .wheel-wrap{display:flex; justify-content:center; align-items:center; gap:2px; padding:14px 0 26px; position:relative;}
+  .wheel-wrap::before, .wheel-wrap::after{content:''; position:absolute; left:14px; right:14px; height:56px; pointer-events:none;}
+  .wheel-col{height:280px; width:92px; overflow-y:scroll; scroll-snap-type:y mandatory; -ms-overflow-style:none; scrollbar-width:none;}
+  .wheel-col::-webkit-scrollbar{display:none;}
+  .wheel-item{height:56px; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:24px; color:var(--text-faint); scroll-snap-align:center;}
+  .wheel-item.center{font-size:38px; color:var(--text); font-weight:600;}
+  .wheel-pad{height:112px;}
+  .wheel-sep{font-family:var(--font-display); font-size:38px; font-weight:600; padding:0 2px; color:var(--text);}
+  .ampm-col{display:flex; flex-direction:column; gap:14px; width:64px; padding-left:8px;}
+  .ampm-item{padding:8px 4px; border-radius:10px; font-size:15px; color:var(--text-faint); text-align:center;}
+  .ampm-item.selected{color:var(--accent); font-weight:700; font-size:19px;}
+
+  .setting-card{background:var(--surface); border-radius:16px; margin-bottom:12px; overflow:hidden;}
+  .setting-row{display:flex; align-items:center; justify-content:space-between; padding:15px 16px;}
+  .setting-row + .setting-row{border-top:1px solid var(--border);}
+  .setting-row .sr-label{font-size:15px;}
+  .setting-row .sr-right{font-size:14px; color:var(--text-dim); display:flex; align-items:center; gap:6px;}
+  .setting-row.tappable:active{background:var(--surface-2);}
+  .chev{color:var(--text-faint); font-size:14px;}
+
+  .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
 
   /* ---------- Stopwatch ---------- */
   .sw-wrap{display:flex; flex-direction:column; align-items:center; padding-top:30px;}
@@ -137,8 +185,6 @@
   .tab.active{color:var(--accent);}
   .tab svg{width:22px; height:22px;}
   .tab-label{font-size:11px; font-weight:500;}
-
-  .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
 </style>
 </head>
 <body>
@@ -159,7 +205,6 @@
     <!-- Alarm -->
     <section class="view" id="view-alarm">
       <div id="ringing-banner-slot"></div>
-      <div id="alarm-editor-slot"></div>
       <div id="alarm-list"></div>
       <button class="add-alarm-btn" id="btn-add-alarm">+ Add alarm</button>
     </section>
@@ -231,11 +276,66 @@
   </nav>
 </div>
 
+<!-- City picker sheet -->
 <div class="sheet-backdrop" id="sheet-backdrop">
   <div class="sheet">
     <div class="sheet-handle"></div>
     <p class="sheet-title">Add a city</p>
     <div id="sheet-list"></div>
+  </div>
+</div>
+
+<!-- Generic alarm-settings sheet (Repeat / Label / Ringtone / Snooze) -->
+<div class="sheet-backdrop" id="alarm-sheet-backdrop">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <p class="sheet-title" id="alarm-sheet-title">Setting</p>
+    <div id="alarm-sheet-body"></div>
+  </div>
+</div>
+
+<!-- Full-screen Alarm Editor -->
+<div class="alarm-overlay" id="alarm-overlay">
+  <div class="ao-header">
+    <button id="ao-cancel" aria-label="Close">&#10005;</button>
+    <h2>Edit alarm</h2>
+    <button class="ao-save" id="ao-save" aria-label="Save">&#10003;</button>
+  </div>
+  <div class="ao-body">
+    <div class="wheel-wrap">
+      <div class="wheel-col" id="wheel-hour"></div>
+      <div class="wheel-sep">:</div>
+      <div class="wheel-col" id="wheel-minute"></div>
+      <div class="ampm-col" id="ampm-col">
+        <div class="ampm-item" data-val="AM">AM</div>
+        <div class="ampm-item" data-val="PM">PM</div>
+      </div>
+    </div>
+
+    <div class="setting-card">
+      <div class="setting-row tappable" id="row-repeat">
+        <span class="sr-label">Repeat</span>
+        <span class="sr-right" id="repeat-summary">Never<span class="chev">&#8250;</span></span>
+      </div>
+    </div>
+
+    <div class="setting-card">
+      <div class="setting-row tappable" id="row-label">
+        <span class="sr-label">Label</span>
+        <span class="sr-right" id="label-summary">None<span class="chev">&#8250;</span></span>
+      </div>
+      <div class="setting-row tappable" id="row-ringtone">
+        <span class="sr-label">Ringtone &amp; vibration</span>
+        <span class="sr-right" id="ringtone-summary">Default ringtone<span class="chev">&#8250;</span></span>
+      </div>
+    </div>
+
+    <div class="setting-card">
+      <div class="setting-row tappable" id="row-snooze">
+        <span class="sr-label">Snooze</span>
+        <span class="sr-right" id="snooze-summary">5 times, 5-min interval<span class="chev">&#8250;</span></span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -262,6 +362,16 @@ var CITY_CATALOG = [
   {name:'Toronto', tz:'America/Toronto'}
 ];
 
+var DAY_LABELS = ['S','M','T','W','T','F','S'];
+var DAY_FULL   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+var RINGTONES = [
+  {id:'default', name:'Default ringtone', freq:950},
+  {id:'chime',   name:'Chime',            freq:1300},
+  {id:'digital', name:'Digital',          freq:700},
+  {id:'classic', name:'Classic bell',     freq:1550}
+];
+
 var state = {
   cities: [
     {name:'Dhaka', tz:'Asia/Dhaka'},
@@ -270,9 +380,11 @@ var state = {
     {name:'Tokyo', tz:'Asia/Tokyo'}
   ],
   alarms: [],
-  editingAlarm: false,
   ringingAlarm: null
 };
+
+/* editor draft (while the full-screen editor is open) */
+var draft = null; // {editId, hour24, minute, ampm, label, repeat:[7 bool], ringtoneId, vibrate, snoozeCount, snoozeInterval}
 
 /* ============ tab switching ============ */
 var titles = {world:'World clock', alarm:'Alarm', stopwatch:'Stopwatch', timer:'Timer'};
@@ -304,7 +416,6 @@ function dayDiffLabel(tz){
   var localDay = here.getDate();
   var tzDay = new Date(here.toLocaleString('en-US', {timeZone: tz})).getDate();
   if(tzDay === localDay) return 'Today';
-  var hereMonth = here.getMonth();
   var tzDate = new Date(here.toLocaleString('en-US', {timeZone: tz}));
   if(tzDate.getTime() > here.getTime() || (tzDay > localDay)) return 'Tomorrow';
   return 'Yesterday';
@@ -358,7 +469,7 @@ document.getElementById('sheet-backdrop').addEventListener('click', function(e){
   if(e.target === this) this.classList.remove('active');
 });
 
-/* ============ Alarm ============ */
+/* ============ Alarm sound ============ */
 function beep(duration, freq){
   try{
     var ctx = beep.ctx || (beep.ctx = new (window.AudioContext || window.webkitAudioContext)());
@@ -374,125 +485,414 @@ function beep(duration, freq){
   }catch(e){}
 }
 var alarmLoop = null;
-function startAlarmSound(){
+function startAlarmSound(a){
   stopAlarmSound();
-  beep(0.5, 950);
-  alarmLoop = setInterval(function(){ beep(0.5, 950); if(navigator.vibrate) navigator.vibrate(400); }, 900);
+  var rt = RINGTONES.find(function(r){return r.id === a.ringtoneId;}) || RINGTONES[0];
+  beep(0.5, rt.freq);
+  if(a.vibrate && navigator.vibrate) navigator.vibrate(400);
+  alarmLoop = setInterval(function(){
+    beep(0.5, rt.freq);
+    if(a.vibrate && navigator.vibrate) navigator.vibrate(400);
+  }, 900);
 }
 function stopAlarmSound(){
   if(alarmLoop){ clearInterval(alarmLoop); alarmLoop = null; }
 }
 
-function renderAlarmEditor(){
-  var slot = document.getElementById('alarm-editor-slot');
-  if(!state.editingAlarm){ slot.innerHTML = ''; return; }
-  slot.innerHTML =
-    '<div class="alarm-editor">' +
-      '<input type="time" id="new-alarm-time" value="07:00">' +
-      '<input type="text" id="new-alarm-label" placeholder="Label (optional)">' +
-      '<div class="editor-actions">' +
-        '<button class="btn btn-secondary" id="cancel-alarm">Cancel</button>' +
-        '<button class="btn btn-primary" id="save-alarm">Save alarm</button>' +
-      '</div>' +
-    '</div>';
-  document.getElementById('cancel-alarm').addEventListener('click', function(){
-    state.editingAlarm = false; renderAlarmEditor();
-  });
-  document.getElementById('save-alarm').addEventListener('click', function(){
-    var t = document.getElementById('new-alarm-time').value || '07:00';
-    var l = document.getElementById('new-alarm-label').value.trim();
-    state.alarms.push({id: Date.now(), time:t, label:l, enabled:true, lastFiredMinute:null});
-    state.editingAlarm = false;
-    renderAlarmEditor();
-    renderAlarms();
-  });
+/* ============ Alarm helpers ============ */
+function fmtAlarmTime(hour24, minute){
+  var h12 = hour24 % 12; if(h12 === 0) h12 = 12;
+  var ap = hour24 >= 12 ? 'PM' : 'AM';
+  return h12 + ':' + String(minute).padStart(2,'0') + ' ' + ap;
 }
-function fmtAlarmTime(t){
-  var parts = t.split(':');
-  var h = parseInt(parts[0],10), m = parts[1];
-  var ap = h >= 12 ? 'PM' : 'AM';
-  var h12 = h % 12; if(h12 === 0) h12 = 12;
-  return h12 + ':' + m + ' ' + ap;
+function repeatSummary(repeat){
+  if(!repeat || repeat.every(function(d){return !d;})) return 'Never';
+  if(repeat.every(function(d){return d;})) return 'Every day';
+  if(repeat[0]===false && repeat[6]===false && repeat[1]&&repeat[2]&&repeat[3]&&repeat[4]&&repeat[5]) return 'Weekdays';
+  if(repeat[0] && repeat[6] && !repeat[1]&&!repeat[2]&&!repeat[3]&&!repeat[4]&&!repeat[5]) return 'Weekends';
+  var days = [];
+  repeat.forEach(function(d,i){ if(d) days.push(DAY_FULL[i]); });
+  return days.join(', ');
 }
+
+/* ============ Alarm list rendering ============ */
 function renderAlarms(){
   var list = document.getElementById('alarm-list');
-  if(state.alarms.length === 0 && !state.editingAlarm){
+  if(state.alarms.length === 0){
     list.innerHTML = '<div class="empty-state"><p>No alarms set.</p></div>';
     return;
   }
   list.innerHTML = '';
-  state.alarms.slice().sort(function(a,b){return a.time.localeCompare(b.time);}).forEach(function(a){
+  state.alarms.slice().sort(function(a,b){
+    return (a.hour24*60+a.minute) - (b.hour24*60+b.minute);
+  }).forEach(function(a){
     var card = document.createElement('div');
     card.className = 'alarm-card' + (a.enabled ? '' : ' disabled');
     card.innerHTML =
-      '<div>' +
-        '<div class="alarm-time">'+fmtAlarmTime(a.time)+'</div>' +
+      '<div class="alarm-main">' +
+        '<div class="alarm-time">'+fmtAlarmTime(a.hour24, a.minute)+'</div>' +
         '<div class="alarm-label">'+(a.label || 'Alarm')+'</div>' +
+        '<div class="alarm-repeat">'+repeatSummary(a.repeat)+'</div>' +
       '</div>' +
       '<div style="display:flex; align-items:center; gap:14px;">' +
         '<button class="city-remove" aria-label="Delete alarm">&#10005;</button>' +
         '<div class="switch '+(a.enabled?'on':'')+'"></div>' +
       '</div>';
-    card.querySelector('.switch').addEventListener('click', function(){
+    card.querySelector('.switch').addEventListener('click', function(e){
+      e.stopPropagation();
       a.enabled = !a.enabled;
       renderAlarms();
     });
-    card.querySelector('.city-remove').addEventListener('click', function(){
+    card.querySelector('.city-remove').addEventListener('click', function(e){
+      e.stopPropagation();
       state.alarms = state.alarms.filter(function(x){return x.id !== a.id;});
       renderAlarms();
+    });
+    card.querySelector('.alarm-main').addEventListener('click', function(){
+      openAlarmEditor(a);
     });
     list.appendChild(card);
   });
 }
-document.getElementById('btn-add-alarm').addEventListener('click', function(){
-  state.editingAlarm = true;
-  renderAlarmEditor();
-});
+
 function renderRinging(){
   var slot = document.getElementById('ringing-banner-slot');
   if(!state.ringingAlarm){ slot.innerHTML=''; return; }
   var a = state.ringingAlarm;
   slot.innerHTML =
     '<div class="ringing-banner">' +
-      '<div class="rt">'+fmtAlarmTime(a.time)+'</div>' +
+      '<div class="rt">'+fmtAlarmTime(a.hour24, a.minute)+'</div>' +
       '<div class="rl">'+(a.label || 'Alarm')+' is ringing</div>' +
       '<div class="ringing-actions">' +
-        '<button class="btn btn-secondary" id="snooze-alarm">Snooze 5 min</button>' +
+        '<button class="btn btn-secondary" id="snooze-alarm">Snooze</button>' +
         '<button class="btn btn-primary" id="dismiss-alarm">Dismiss</button>' +
       '</div>' +
     '</div>';
   document.getElementById('dismiss-alarm').addEventListener('click', function(){
     stopAlarmSound();
+    if(repeatSummary(a.repeat) === 'Never'){ a.enabled = false; }
     state.ringingAlarm = null;
     renderRinging();
+    renderAlarms();
   });
   document.getElementById('snooze-alarm').addEventListener('click', function(){
     stopAlarmSound();
-    var snoozeTime = new Date(Date.now() + 5*60000);
-    var hh = String(snoozeTime.getHours()).padStart(2,'0');
-    var mm = String(snoozeTime.getMinutes()).padStart(2,'0');
-    state.alarms.push({id: Date.now(), time: hh+':'+mm, label:(a.label||'Alarm')+' (snoozed)', enabled:true, lastFiredMinute:null});
+    var interval = a.snoozeInterval || 5;
+    var snoozeTime = new Date(Date.now() + interval*60000);
+    state.alarms.push({
+      id: Date.now(),
+      hour24: snoozeTime.getHours(),
+      minute: snoozeTime.getMinutes(),
+      label: (a.label || 'Alarm') + ' (snoozed)',
+      repeat: [false,false,false,false,false,false,false],
+      ringtoneId: a.ringtoneId,
+      vibrate: a.vibrate,
+      snoozeCount: a.snoozeCount,
+      snoozeInterval: a.snoozeInterval,
+      enabled: true,
+      lastFiredMinute: null
+    });
+    if(repeatSummary(a.repeat) === 'Never'){ a.enabled = false; }
     state.ringingAlarm = null;
     renderRinging();
     renderAlarms();
   });
 }
+
 function checkAlarms(){
   if(state.ringingAlarm) return;
   var now = new Date();
-  var hh = String(now.getHours()).padStart(2,'0');
-  var mm = String(now.getMinutes()).padStart(2,'0');
-  var cur = hh+':'+mm;
-  var minuteKey = now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate()+'-'+hh+'-'+mm;
+  var curH = now.getHours(), curM = now.getMinutes();
+  var dow = now.getDay(); // 0=Sun
+  var minuteKey = now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate()+'-'+curH+'-'+curM;
   state.alarms.forEach(function(a){
-    if(a.enabled && a.time === cur && a.lastFiredMinute !== minuteKey){
-      a.lastFiredMinute = minuteKey;
-      state.ringingAlarm = a;
-      renderRinging();
-      startAlarmSound();
-    }
+    if(!a.enabled) return;
+    if(a.hour24 !== curH || a.minute !== curM) return;
+    if(a.lastFiredMinute === minuteKey) return;
+    var repeatsToday = a.repeat && a.repeat[dow];
+    var isOneShot = repeatSummary(a.repeat) === 'Never';
+    if(!repeatsToday && !isOneShot) return;
+    a.lastFiredMinute = minuteKey;
+    state.ringingAlarm = a;
+    renderRinging();
+    startAlarmSound(a);
   });
 }
+
+/* ============ Full-screen Alarm Editor ============ */
+function buildWheel(el, values, initialIndex, onSettle){
+  el.innerHTML = '';
+  var pad1 = document.createElement('div'); pad1.className = 'wheel-pad'; el.appendChild(pad1);
+  values.forEach(function(v){
+    var it = document.createElement('div');
+    it.className = 'wheel-item';
+    it.textContent = v;
+    el.appendChild(it);
+  });
+  var pad2 = document.createElement('div'); pad2.className = 'wheel-pad'; el.appendChild(pad2);
+  var itemH = 56;
+
+  function highlight(){
+    var idx = Math.round(el.scrollTop / itemH);
+    idx = Math.max(0, Math.min(values.length - 1, idx));
+    Array.prototype.forEach.call(el.children, function(child, i){
+      if(!child.classList.contains('wheel-item')) return;
+      var itemIdx = i - 1;
+      var dist = Math.abs(itemIdx - idx);
+      child.classList.toggle('center', itemIdx === idx);
+      child.style.opacity = dist === 0 ? 1 : dist === 1 ? 0.55 : dist === 2 ? 0.3 : 0.15;
+    });
+    return idx;
+  }
+
+  var settleTimer = null;
+  el.addEventListener('scroll', function(){
+    highlight();
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(function(){
+      var idx = highlight();
+      el.scrollTo({top: idx * itemH, behavior:'smooth'});
+      onSettle(values[idx], idx);
+    }, 120);
+  });
+
+  el.scrollTop = initialIndex * itemH;
+  highlight();
+  onSettle(values[initialIndex], initialIndex);
+}
+
+function initWheels(){
+  var hours = []; for(var h=1; h<=12; h++) hours.push(String(h).padStart(2,'0'));
+  var mins  = []; for(var m=0; m<60; m++) mins.push(String(m).padStart(2,'0'));
+
+  var h12 = draft.hour24 % 12; if(h12 === 0) h12 = 12;
+  var hourIdx = h12 - 1;
+
+  buildWheel(document.getElementById('wheel-hour'), hours, hourIdx, function(val){
+    draft.hour24 = computeHour24(parseInt(val,10), draft.ampm);
+  });
+  buildWheel(document.getElementById('wheel-minute'), mins, draft.minute, function(val){
+    draft.minute = parseInt(val,10);
+  });
+
+  document.querySelectorAll('.ampm-item').forEach(function(item){
+    item.classList.toggle('selected', item.dataset.val === draft.ampm);
+    item.onclick = function(){
+      draft.ampm = item.dataset.val;
+      var curH12 = draft.hour24 % 12; if(curH12 === 0) curH12 = 12;
+      draft.hour24 = computeHour24(curH12, draft.ampm);
+      document.querySelectorAll('.ampm-item').forEach(function(it){
+        it.classList.toggle('selected', it.dataset.val === draft.ampm);
+      });
+    };
+  });
+}
+function computeHour24(h12, ampm){
+  var h = h12 % 12;
+  if(ampm === 'PM') h += 12;
+  return h;
+}
+
+function refreshSummaries(){
+  document.getElementById('repeat-summary').innerHTML = repeatSummary(draft.repeat) + '<span class="chev">&#8250;</span>';
+  document.getElementById('label-summary').innerHTML = (draft.label || 'None') + '<span class="chev">&#8250;</span>';
+  var rt = RINGTONES.find(function(r){return r.id === draft.ringtoneId;}) || RINGTONES[0];
+  document.getElementById('ringtone-summary').innerHTML = rt.name + (draft.vibrate ? ' &middot; vibrate' : ' &middot; no vibrate') + '<span class="chev">&#8250;</span>';
+  document.getElementById('snooze-summary').innerHTML = draft.snoozeCount + ' times, ' + draft.snoozeInterval + '-min interval<span class="chev">&#8250;</span>';
+}
+
+function openAlarmEditor(existing){
+  if(existing){
+    draft = {
+      editId: existing.id,
+      hour24: existing.hour24,
+      minute: existing.minute,
+      ampm: existing.hour24 >= 12 ? 'PM' : 'AM',
+      label: existing.label || '',
+      repeat: existing.repeat.slice(),
+      ringtoneId: existing.ringtoneId,
+      vibrate: existing.vibrate,
+      snoozeCount: existing.snoozeCount,
+      snoozeInterval: existing.snoozeInterval
+    };
+  }else{
+    var now = new Date();
+    draft = {
+      editId: null,
+      hour24: now.getHours(),
+      minute: now.getMinutes(),
+      ampm: now.getHours() >= 12 ? 'PM' : 'AM',
+      label: '',
+      repeat: [false,false,false,false,false,false,false],
+      ringtoneId: 'default',
+      vibrate: true,
+      snoozeCount: 5,
+      snoozeInterval: 5
+    };
+  }
+  document.getElementById('alarm-overlay').classList.add('active');
+  initWheels();
+  refreshSummaries();
+}
+function closeAlarmEditor(){
+  document.getElementById('alarm-overlay').classList.remove('active');
+  draft = null;
+}
+document.getElementById('btn-add-alarm').addEventListener('click', function(){ openAlarmEditor(null); });
+document.getElementById('ao-cancel').addEventListener('click', closeAlarmEditor);
+document.getElementById('ao-save').addEventListener('click', function(){
+  if(!draft) return;
+  if(draft.editId){
+    var a = state.alarms.find(function(x){return x.id === draft.editId;});
+    if(a){
+      a.hour24 = draft.hour24; a.minute = draft.minute; a.label = draft.label.trim();
+      a.repeat = draft.repeat; a.ringtoneId = draft.ringtoneId; a.vibrate = draft.vibrate;
+      a.snoozeCount = draft.snoozeCount; a.snoozeInterval = draft.snoozeInterval;
+      a.lastFiredMinute = null;
+    }
+  }else{
+    state.alarms.push({
+      id: Date.now(),
+      hour24: draft.hour24, minute: draft.minute, label: draft.label.trim(),
+      repeat: draft.repeat, ringtoneId: draft.ringtoneId, vibrate: draft.vibrate,
+      snoozeCount: draft.snoozeCount, snoozeInterval: draft.snoozeInterval,
+      enabled: true, lastFiredMinute: null
+    });
+  }
+  closeAlarmEditor();
+  renderAlarms();
+});
+
+/* ---- Repeat sub-sheet ---- */
+function openRepeatSheet(){
+  document.getElementById('alarm-sheet-title').textContent = 'Repeat';
+  var body = document.getElementById('alarm-sheet-body');
+  body.innerHTML =
+    '<div class="quick-presets">' +
+      '<button class="quick-chip" data-preset="everyday">Every day</button>' +
+      '<button class="quick-chip" data-preset="weekdays">Weekdays</button>' +
+      '<button class="quick-chip" data-preset="weekends">Weekends</button>' +
+      '<button class="quick-chip" data-preset="never">Once</button>' +
+    '</div>' +
+    '<div class="day-grid" id="repeat-day-grid"></div>' +
+    '<button class="sheet-done" id="repeat-done">Done</button>';
+  var grid = document.getElementById('repeat-day-grid');
+  DAY_LABELS.forEach(function(lab, i){
+    var b = document.createElement('button');
+    b.className = 'day-btn' + (draft.repeat[i] ? ' on' : '');
+    b.textContent = lab;
+    b.addEventListener('click', function(){
+      draft.repeat[i] = !draft.repeat[i];
+      b.classList.toggle('on', draft.repeat[i]);
+    });
+    grid.appendChild(b);
+  });
+  body.querySelectorAll('.quick-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var p = chip.dataset.preset;
+      if(p === 'everyday') draft.repeat = [true,true,true,true,true,true,true];
+      else if(p === 'weekdays') draft.repeat = [false,true,true,true,true,true,false];
+      else if(p === 'weekends') draft.repeat = [true,false,false,false,false,false,true];
+      else draft.repeat = [false,false,false,false,false,false,false];
+      grid.querySelectorAll('.day-btn').forEach(function(b, i){
+        b.classList.toggle('on', draft.repeat[i]);
+      });
+    });
+  });
+  document.getElementById('repeat-done').addEventListener('click', function(){
+    document.getElementById('alarm-sheet-backdrop').classList.remove('active');
+    refreshSummaries();
+  });
+  document.getElementById('alarm-sheet-backdrop').classList.add('active');
+}
+
+/* ---- Label sub-sheet ---- */
+function openLabelSheet(){
+  document.getElementById('alarm-sheet-title').textContent = 'Label';
+  var body = document.getElementById('alarm-sheet-body');
+  body.innerHTML =
+    '<input type="text" class="sheet-input" id="label-input" placeholder="e.g. Wake up, Gym, Medicine" maxlength="40">' +
+    '<button class="sheet-done" id="label-done">Done</button>';
+  document.getElementById('label-input').value = draft.label;
+  document.getElementById('label-done').addEventListener('click', function(){
+    draft.label = document.getElementById('label-input').value.trim();
+    document.getElementById('alarm-sheet-backdrop').classList.remove('active');
+    refreshSummaries();
+  });
+  document.getElementById('alarm-sheet-backdrop').classList.add('active');
+}
+
+/* ---- Ringtone & vibration sub-sheet ---- */
+function openRingtoneSheet(){
+  document.getElementById('alarm-sheet-title').textContent = 'Ringtone & vibration';
+  var body = document.getElementById('alarm-sheet-body');
+  body.innerHTML = '<div id="ringtone-list"></div>' +
+    '<div class="setting-row" style="padding:15px 8px;">' +
+      '<span class="sr-label">Vibrate</span>' +
+      '<div class="switch" id="vibrate-switch"></div>' +
+    '</div>' +
+    '<button class="sheet-done" id="ringtone-done">Done</button>';
+  var list = document.getElementById('ringtone-list');
+  RINGTONES.forEach(function(rt){
+    var item = document.createElement('div');
+    item.className = 'sheet-item' + (draft.ringtoneId === rt.id ? ' selected' : '');
+    item.innerHTML = '<div>'+rt.name+'</div><span class="check">&#10003;</span>';
+    item.addEventListener('click', function(){
+      draft.ringtoneId = rt.id;
+      beep(0.35, rt.freq);
+      list.querySelectorAll('.sheet-item').forEach(function(it){ it.classList.remove('selected'); });
+      item.classList.add('selected');
+    });
+    list.appendChild(item);
+  });
+  var vSwitch = document.getElementById('vibrate-switch');
+  vSwitch.classList.toggle('on', draft.vibrate);
+  vSwitch.addEventListener('click', function(){
+    draft.vibrate = !draft.vibrate;
+    vSwitch.classList.toggle('on', draft.vibrate);
+  });
+  document.getElementById('ringtone-done').addEventListener('click', function(){
+    document.getElementById('alarm-sheet-backdrop').classList.remove('active');
+    refreshSummaries();
+  });
+  document.getElementById('alarm-sheet-backdrop').classList.add('active');
+}
+
+/* ---- Snooze sub-sheet ---- */
+function openSnoozeSheet(){
+  document.getElementById('alarm-sheet-title').textContent = 'Snooze';
+  var body = document.getElementById('alarm-sheet-body');
+  body.innerHTML =
+    '<div class="num-field"><label>Snooze times</label><div class="num-stepper">' +
+      '<button id="snz-count-dec">&#8722;</button><span class="num-val" id="snz-count-val"></span><button id="snz-count-inc">+</button>' +
+    '</div></div>' +
+    '<div class="num-field"><label>Interval (minutes)</label><div class="num-stepper">' +
+      '<button id="snz-int-dec">&#8722;</button><span class="num-val" id="snz-int-val"></span><button id="snz-int-inc">+</button>' +
+    '</div></div>' +
+    '<button class="sheet-done" id="snooze-done">Done</button>';
+  function refresh(){
+    document.getElementById('snz-count-val').textContent = draft.snoozeCount;
+    document.getElementById('snz-int-val').textContent = draft.snoozeInterval;
+  }
+  refresh();
+  document.getElementById('snz-count-dec').addEventListener('click', function(){ draft.snoozeCount = Math.max(1, draft.snoozeCount-1); refresh(); });
+  document.getElementById('snz-count-inc').addEventListener('click', function(){ draft.snoozeCount = Math.min(10, draft.snoozeCount+1); refresh(); });
+  document.getElementById('snz-int-dec').addEventListener('click', function(){ draft.snoozeInterval = Math.max(1, draft.snoozeInterval-1); refresh(); });
+  document.getElementById('snz-int-inc').addEventListener('click', function(){ draft.snoozeInterval = Math.min(30, draft.snoozeInterval+1); refresh(); });
+  document.getElementById('snooze-done').addEventListener('click', function(){
+    document.getElementById('alarm-sheet-backdrop').classList.remove('active');
+    refreshSummaries();
+  });
+  document.getElementById('alarm-sheet-backdrop').classList.add('active');
+}
+
+document.getElementById('row-repeat').addEventListener('click', openRepeatSheet);
+document.getElementById('row-label').addEventListener('click', openLabelSheet);
+document.getElementById('row-ringtone').addEventListener('click', openRingtoneSheet);
+document.getElementById('row-snooze').addEventListener('click', openSnoozeSheet);
+document.getElementById('alarm-sheet-backdrop').addEventListener('click', function(e){
+  if(e.target === this) this.classList.remove('active');
+});
 
 /* ============ Stopwatch ============ */
 var swState = {running:false, startTs:0, elapsed:0, laps:[]};
@@ -667,7 +1067,6 @@ document.querySelectorAll('.preset-chip').forEach(function(chip){
 document.getElementById('header-action').style.visibility = 'hidden';
 renderCities();
 renderAlarms();
-renderAlarmEditor();
 renderRinging();
 renderStopwatch();
 document.getElementById('timer-display').textContent = fmtTimer(readTimerInputs());
